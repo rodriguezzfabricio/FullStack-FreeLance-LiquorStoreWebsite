@@ -1,0 +1,25 @@
+POST http://localhost:3000/api/products
+Content-Type: application/json
+
+{
+  "name": "Test",
+  "price": 20.99,
+  "description": "Yuhh",
+  "imageURL": "'https://i.imgur.com/qF6mRHo.jpeg'",
+  "stock": 30,
+  "category": "Spirits"
+}
+
+
+###
+GET http://localhost:3000/api/products
+
+
+####
+POST http://localhost:3000/api/payments/create-payment-intent
+Content-Type: application/json
+
+{
+  "amount": 5000, 
+  "currency": "usd"
+}

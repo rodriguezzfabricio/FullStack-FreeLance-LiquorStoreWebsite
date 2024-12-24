@@ -1,0 +1,41 @@
+/* App.css */
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+nav a {
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #ff7f50;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+footer {
+  text-align: center;
+  font-size: 14px;
+  background-color: #333;
+  color: #fff;
+  padding: 20px 0;
+  margin-top: auto; /* Ensure footer sticks to the bottom */
+}
+
+button {
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+}
