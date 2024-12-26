@@ -3,8 +3,9 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const connectDB = require('./config/db');
-const productRoutes = require('./routes/productRoutes');
-const paymentRoutes = require('./routes/paymentRoutes'); // Import the payment routes
+const productRoutes = require('./routes/productRoutes'); // Import product routes
+const paymentRoutes = require('./routes/paymentRoutes'); // Import payment routes
+const orderRoutes = require('./routes/orderRoutes'); // Import order routes
 
 dotenv.config(); // Load environment variables
 
@@ -25,12 +26,19 @@ app.get('/', (req, res) => {
 });
 
 // API Routes
-app.use('/api/products', productRoutes);
-app.use('/api/payments', paymentRoutes); // Add payment route
+app.use('/api/products', productRoutes); // Products endpoints
+app.use('/api/payments', paymentRoutes); // Payments endpoints
+app.use('/api/orders', orderRoutes); // Orders endpoints
 
 // 404 Handler for Undefined Routes
 app.use((req, res) => {
   res.status(404).json({ message: 'Route not found' });
+});
+
+// Error Handling Middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: 'Server Error', error: err.message });
 });
 
 // Start the Server

@@ -67,4 +67,15 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+//fetching detailed for products 
+app.get('/api/products/:id', async (req, res) => {
+  const productId = req.params.id;
+  try {
+      const product = await Product.findById(productId);
+      res.json(product);
+  } catch (error) {
+      res.status(404).json({ message: 'Product not found' });
+  }
+});
+
 module.exports = router;
