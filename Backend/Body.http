@@ -25,3 +25,16 @@ Content-Type: application/json
 }
 
 #####
+POST http://localhost:3000/api/orders
+Content-Type: application/json
+
+{
+  "customerName": "John Doe",
+  "contact": "1234567890",
+  "deliveryAddress": "123 Main St, Baltimore, MD",
+  "items": [
+    { "name": "Product 1", "quantity": 2 },
+    { "name": "Product 2", "quantity": 1 }
+  ],
+  "totalAmount": 59.99
+}

@@ -39,6 +39,21 @@ router.get('/category/:category', async (req, res) => {
   }
 });
 
+// Route: Get a single product by ID
+router.get('/:id', async (req, res) => {
+  const productId = req.params.id;
+  try {
+    const product = await Product.findById(productId);
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+    res.json(product);
+  } catch (err) {
+    console.error('Error fetching product by ID:', err.message);
+    res.status(500).json({ message: 'Failed to retrieve product' });
+  }
+});
+
 // Route: Update a product by ID
 router.put('/:id', async (req, res) => {
   const { name, price, description, imageURL, stock, category } = req.body;
@@ -49,6 +64,9 @@ router.put('/:id', async (req, res) => {
       { name, price, description, imageURL, stock, category },
       { new: true } // Return the updated document
     );
+    if (!updatedProduct) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
     res.json(updatedProduct);
   } catch (err) {
     console.error('Error updating product:', err.message);
@@ -59,22 +77,14 @@ router.put('/:id', async (req, res) => {
 // Route: Delete a product by ID
 router.delete('/:id', async (req, res) => {
   try {
-    await Product.findByIdAndDelete(req.params.id);
+    const deletedProduct = await Product.findByIdAndDelete(req.params.id);
+    if (!deletedProduct) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
     res.json({ message: 'Product deleted successfully' });
   } catch (err) {
     console.error('Error deleting product:', err.message);
     res.status(500).json({ message: 'Failed to delete product' });
-  }
-});
-
-//fetching detailed for products 
-app.get('/api/products/:id', async (req, res) => {
-  const productId = req.params.id;
-  try {
-      const product = await Product.findById(productId);
-      res.json(product);
-  } catch (error) {
-      res.status(404).json({ message: 'Product not found' });
   }
 });
 
